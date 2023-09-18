@@ -10,7 +10,10 @@ export default function BetterSignupForm() {
     console.log(newValue);
     setFormData((currData) => {
       currData[changeField] = newValue;
-      return { ...currData };
+      return {
+        ...currData,
+        [changeField]: newValue,
+      };
     });
   };
 
@@ -37,7 +40,7 @@ export default function BetterSignupForm() {
         value={formData.lastName}
         onChange={handleChange}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <button onSubmit={handleSubmit}>Submit</button>
     </form>
   );
 }

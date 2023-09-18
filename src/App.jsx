@@ -5,11 +5,13 @@ import './App.css';
 import UserNameForm from './UserNameForm';
 import SignupForm from './SignupForm';
 import BetterSignupForm from './BetterSignupForm';
+import ShoppingListForm from './ShoppingListForm';
+import ShoppingList from './ShoppingList';
 
 function App() {
   return (
     <>
-      <BetterSignupForm />
+      <ShoppingList />
     </>
   );
 }
