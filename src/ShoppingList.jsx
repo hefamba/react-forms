@@ -25,7 +25,10 @@ export default function ShoppingList() {
       <h1>Shopping List:</h1>
       <ul>
         {items.map((item) => (
-          <li key={item.id} onClick={() => deleteItem(item.id)}>
+          <li
+            key={item.id}
+            onClick={() => deleteItem(item.id)}
+            style={{ cursor: 'pointer' }}>
             {item.product} - {item.quantity}
           </li>
         ))}

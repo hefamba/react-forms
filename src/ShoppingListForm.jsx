@@ -2,11 +2,23 @@ import React from 'react';
 import { useState } from 'react';
 import ShoppingList from './ShoppingList';
 
-export default function ShoppingListForm({ addItem, deleteItem }) {
+export default function ShoppingListForm({ addItem }) {
+  const [productValid, setProductValid] = useState(false);
   const [formData, setFormData] = useState({ product: '', quantity: '' });
+  const validate = () => {
+    if (product.length === 0) {
+      setProductValid(false);
+    } else {
+      setProductValid(true);
+    }
+  };
   const handleChange = (event) => {
     const changeField = event.target.name;
     const newValue = event.target.value;
+
+    if (changeField === 'product') {
+      validate(newValue);
+    }
     setFormData((currData) => {
       return {
         ...currData,
@@ -17,10 +29,12 @@ export default function ShoppingListForm({ addItem, deleteItem }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    addItem(formData);
-    setFormData({ product: '', quantity: '' });
+    if (productValid) {
+      addItem(formData);
+      setFormData({ product: '', quantity: '' });
+    }
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -33,6 +47,9 @@ export default function ShoppingListForm({ addItem, deleteItem }) {
           onChange={handleChange}
           value={formData.product}
         />
+        {!productValid && (
+          <p style={{ color: 'red' }}>* Product cannot be empty</p>
+        )}
 
         <label htmlFor="quantity">quantity</label>
         <input
@@ -43,7 +60,7 @@ export default function ShoppingListForm({ addItem, deleteItem }) {
           onChange={handleChange}
           value={formData.quantity}
         />
-        <button>AddItem</button>
+        <button disabled={!productValid}>AddItem</button>
       </form>
     </div>
   );
