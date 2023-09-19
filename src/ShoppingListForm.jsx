@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import ShoppingList from './ShoppingList';
 
-export default function ShoppingListForm({ addItem }) {
+export default function ShoppingListForm({ addItem, deleteItem }) {
   const [formData, setFormData] = useState({ product: '', quantity: '' });
   const handleChange = (event) => {
     const changeField = event.target.name;
